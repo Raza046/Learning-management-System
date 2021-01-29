@@ -1,0 +1,21 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+    <h1>ADD COURSES TO TIME TABLE</h1> 
+    <br><br>
+    {% for c in all_c %}
+
+    <br><td> <form style="margin-top:-38px;" action="{% url 'AddCoursesToTimetable1' cv c.Course_Name %}" method="post">{% csrf_token %}
+        <button class="btn btn-primary">{{c.Course_Name}}
+        <input type="hidden" name="change1" id="change1" value="{{c.Course_Name}}" /></button>
+    </form></td>
+
+<br><br>
+
+    {% endfor %}
+
+
+
+{% endblock %}

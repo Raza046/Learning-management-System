@@ -1,0 +1,88 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<h2>{{tch.name}}</h2>
+<br><br>
+
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Options</th>
+                    <th scope="col" ><p>Section 1</p></th>
+                    <th scope="col" ><p>Section 2</p></th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                    <td><button class="btn btn-primary"> Peoples </button></td><br>
+                    {% for s in sec %}
+                    <td><form action="{% url 'Coursepeoples' cs.id  s %}" method="post">{% csrf_token %}
+                        <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+                    </form></td>
+                    {% endfor %}
+            </tr>
+
+            <tr>
+                <td><button class="btn btn-danger"> Attendence </button></td><br>
+                {% for s in sec %}
+                <td><form action="{% url 'CreateAttendence' cs.id  s %}" method="post">{% csrf_token %}
+                    <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+                </form></td>
+                {% endfor %}
+        </tr>
+
+            <tr>
+                <td><button class="btn btn-danger"> Grades </button></td>                
+                {% for s in sec %}
+                <td><form action="{% url 'CourseGrades' cs.id s %}" method="post">{% csrf_token %}
+                    <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+                </form></td>
+                {% endfor %}
+        </tr>
+
+        <tr>
+            <td><button class="btn btn-info"> Announcements </button></td>
+            
+            {% for s in sec %}
+            <td><form action="{% url 'CreateAnnouncements' cs.id  s %}" method="post">{% csrf_token %}
+                <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+            </form></td>
+            {% endfor %}
+    </tr>
+
+    <tr>
+        <td><button class="btn btn-success"> Assignments </button></td>
+        {% for s in sec %}
+        <td><form action="{% url 'TeacherAllAssignments' cs.id  s %}" method="post">{% csrf_token %}
+            <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+        </form></td>
+        {% endfor %}
+</tr>
+
+
+<tr>
+    <td><button class="btn btn-danger"> Quizes </button></td>    
+    {% for s in sec %}
+    <td><form action="{% url 'TchQuiz' cs.id  s %}" method="post">{% csrf_token %}
+        <input type="submit" name="sections" class="btn btn-primary" value="{{s}}"/><br>
+    </form></td>
+    {% endfor %}
+</tr>
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+
+

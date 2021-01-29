@@ -1,0 +1,14 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+<h1 class="text-center">Add Course</h1>
+<form style="margin-left:100px;" action="add_Course" method="post" class="admission-form d-block">
+
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button style="margin-left:50px;margin-top:50px;" type="submit" class="btn btn-danger">
+    Save
+  </button>
+</form>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends base_template %}
+{% block dashboard-body %}
+{% load tag %}
+
+
+<center><h2 style="font-family:bold;margin:50px;">CREATE ATTENDENCE</h2></center>
+<a href="{% url 'TeacherDashboard'  %}"><button class="btn btn-secondary" ><- Back to Courses</button></a><br><br>
+
+<div class="row" style="margin-top:100px;">
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" ><p>Date</p></th>
+                    <th scope="col">Course</th>
+                    <th scope="col" ><p>Timing</p></th>
+                    <th scope="col" ><p>Day</p></th>
+                    <th scope="col" ><p>Option</p></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                
+                {% for cs in mytch.Courses.all %}
+                {% for t in TD %}
+                  {% if t.Course == cs and t.Day == Today %}
+
+            <tr>
+                <td><span class="name">{{dates}}<br></span></td><br>
+                <td><span class="name">{{cs.Course_Name}}<br></span></td><br>
+                <td><span class="date">{{t.Time}}</span></td><br>
+                <td><span class="name">{{t.Day}}<br></span></td><br>
+
+                {% if Tnow|to_str1 <= t.Time|last_str and Tnow|to_str1 >= t.Time|to_str1  %}
+                <td><a href="{% url 'TeachersStudentList1' cs.id s t.Time|slugify %}"><button class="btn btn-danger">Create Attendence</button></a></td><br>
+                  {% elif  Tnow|to_str1 > t.Time|to_str1 %}
+                  <td><div class="alert alert-danger">
+                    <strong>Attendence has been closed</strong>
+                  </div></td><br>
+                  {% else %}
+                  <td><div class="alert alert-danger">
+                      <strong>Attendence will be Opened at {{t.Time|to_str1}}.</strong>
+                    </div></td><br>
+                {% endif %}
+
+          </tr>
+
+                    {% endif %}
+                {% endfor %}
+                {% endfor %}
+
+
+    </tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<a href="{% url 'detailTeacher' p_url %}"><button class="btn btn-secondary" ><-- Back to Teacher Details</button></a><br><br>
+<center><h2 style="font-family:bold;margin:50px;">ASSIGNING COURSES TO TEACHER</h2></center><br>
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Credit Hours</th>
+                    <th scope="col">Add Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in t_course.Courses.all %}
+                <tr>
+                    <td>{{ course.Course_Id }}</td>
+                    <td>{{ course.Course_Name }}</td>
+                    <td>{{ course.Department }}</td>
+                    <td>{{ course.credit_hours }}</td>
+                    <td><center><a href="{% url 'RemoveAssigCourseTeach' course.id %}"><button class="btn btn-danger">Remove</button></a></center></td>
+                </tr>
+
+                {% endfor %}
+
+                {% for c1 in add_courses %}
+
+                <tr>
+                    <td>{{ c1.Course_Id }}</td>
+                    <td>{{ c1.Course_Name }}</td>
+                    <td>{{ c1.Department }}</td>
+                    <td>{{ c1.credit_hours }}</td>
+                    <td><center><a href="{% url 'assignCourseTeach' c1.id %}"><button class="btn btn-success">Add</button></a></center></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+    <h1 class="head2" style="margin-top:30px;margin-bottom:80px;">All Questions {{nextBtn}}</h1>
+
+    {% for qs in q.QuestionAns.all %}
+
+    {% if forloop.counter == nextBtn %}
+
+      <div class='body1'>
+
+          <div class="row">
+
+            <div class="col-sm-2 setts1"></div>
+            <div class="col-sm-8 setts1" style="margin-left:55px;background-color:white;border-radius:10px;">
+                  <h5>
+                    <p style="margin-top:10px;"><b style="margin-left:60px;">Q{{forloop.counter}}. {{qs.question}}</b></p>
+                    <hr>
+                </h5>
+                  <div class="q-lbtm-content">
+                      <div class="textStyle" style="margin-top:25px;margin-left:60px;">
+                        <form action="{% url 'AnsTheQuestion' q.id forloop.counter qs.id %}" method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {% for qs1 in qs.MCQAns.all %}
+                        <p><input style="margin-right:7px;" type="radio" id="male" name="opt" value="{{qs1.Answers}}">
+                      {{qs1.Answers}}</p>
+                        {% endfor %}
+                      </div>
+                      <hr>
+                      <div class="question-cat" style="margin-left:16px;">
+                        {% if forloop.counter == lent %}
+                        <p>{{qs.Marks}} Marks <input type="submit" value="Submit" class="btn btn-danger" style="margin-left:516px;margin-bottom:10px;"></p>
+                        {% else %}
+                        <p>{{qs.Marks}} Marks <input type="submit" value="Next" class="btn btn-danger" style="margin-left:516px;margin-bottom:10px;"></p>
+                        {% endif %}
+                      </div>
+                  </div>
+              </div>
+            </form>
+
+            </div> <br><br>
+        {% endif %}
+
+        {% endfor %}<br><br>
+
+        {% for qs in q.QuestionAns.all %}
+          {% if forloop.counter != nextBtn %}
+          <button style="margin-top:-660px;" class="btn btn-danger"><a style="color:white;" href="{% url 'NextQuestion' q.id forloop.counter %}">{{forloop.counter}}</a></button>
+          {% endif %}
+        {% endfor %}<br><br>
+
+    {% endblock %}

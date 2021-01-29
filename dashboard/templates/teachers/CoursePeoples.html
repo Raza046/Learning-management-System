@@ -1,0 +1,51 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<br><br>
+
+
+<div class="row" style="margin-top:80px;">
+    <div class="container-fluid">
+      <div class="col-10">
+        <table class="table table-bordered">
+          <thead >
+
+            {% for s in std %}
+
+            {% for crs in s.Courses.all %}
+        
+                {% if crs == cs  and s.Section == sec %}
+            
+                <tr>
+
+                <td> {{s.RegistrationNo}}</td>
+                <td>{{s.name}}</td>
+                <td><center><img class="teacher-profile-img" src="{{ s.photo.url }}"
+                    style="border-radius:60px;" alt="" width="80" height="80"></center>
+                </td>
+                </tr>
+
+              {% endif %}
+      
+          {% endfor %}
+      
+      {% endfor %}
+      
+
+
+  
+          </thead>
+        </table>
+  
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+
+

@@ -1,0 +1,56 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">ENROLLED COURSES</h2></center><br>
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Credit Hours</th>
+                    <th scope="col">Teacher</th>
+                    <th scope="col">Course Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in std.Courses.all %}
+                <tr>
+                    <td>{{ course.Course_Id }}</td>
+                    <td>{{ course.Course_Name }}</td>
+                    <td>{{ course.Department }}</td>
+                    <td>{{ course.credit_hours }}</td>
+
+                    <td>{% for t1 in t %}
+                        {% for tc in t1.Courses.all %}
+
+                            {% if tc == course %}
+                        
+                            {{t1.Name}}<br>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        {% endfor %}
+
+                </td>
+
+               <td><center><a href="{% url 'ViewStudentCoursesDetails' user.id course.id %}"><button class="btn btn-primary"> View </button></a></center></td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

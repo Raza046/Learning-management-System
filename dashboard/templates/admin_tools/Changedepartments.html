@@ -1,0 +1,63 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+<a href="Departments"><button class="btn btn-secondary" ><-- Back to Departments</button></a><br><br>
+<center><h2 style="font-family:bold;margin-top:40px;margin-bottom:40px;">ALL DEPARTMENTS</h2></center><br>
+
+
+<div class="row">
+    <!-- SEMESTER LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Department</th>
+                    <th scope="col">Head Of Dept</th>
+                    <th scope="col">Dept Faculty</th>
+                    <th scope="col">Dept Courses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                <tr>
+
+                    <td><b>{{ department.Dept_Name }}</b></td>
+
+                    {% if department.HOD %}
+                    <td> {{ department.HOD.Name|upper }} <a style="margin-left:10px;" href="{% url 'ChangeDepHOD' department.id %}"><button class="btn btn-danger">Add/Change</button></a></td>
+                    {% else %}
+                    <td>No HOD <a style="margin-left:10px;" href="{% url 'ChangeDepHOD' department.id %}"><button class="btn btn-danger">Add/Change</button></a></td>
+                    {% endif %}
+
+                    <td>{% for f in department.Faculty.all %}
+                    {{ f.Name|upper }} </br>
+                    {% endfor %}
+
+                    {% for f in department.Faculty.all %}
+                    {% empty %}
+                   No Faculty
+                    {% endfor %}
+                    <a style="margin-left:10px;" href="{% url 'ChangeDepFaculty' department.id %}"><button class="btn btn-danger">Add/Change</button></a></br></br>
+                </td>
+
+                <td>
+                    {% for f in department.courses.all %}
+                    {{ f.Course_Id|upper }}</br>
+                    {% endfor %}
+
+                    {% for f in department.courses.all %}
+                    {% empty %}
+                   No Courses
+                    {% endfor %}
+                    <a style="margin-left:10px;" href="{% url 'ChangeDepCourses' department.id %}"><button class="btn btn-danger">Add/Change</button></a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

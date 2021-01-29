@@ -1,0 +1,94 @@
+{% extends base_template %}
+
+{% block dashboard-body %}
+
+<a href="{% url 'TeacherDashboard'  %}"><button class="btn btn-secondary" ><-- Back to Courses</button></a><br><br>
+<center><h2 style="font-family:bold;margin:50px;">MARK ATTENDENCE</h2></center><br>
+
+
+<div class="row">
+  <div class="col-10">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Registration</th>
+          <th scope="col">Name</th>
+          <th scope="col">Department</th>
+          <th scope="col">Semester</th>
+          <th scope="col">Section</th>
+          <th scope="col"><center>Attendence</center></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in std_all %}
+        <tr>
+          <td>
+              {{ student.RegistrationNo }}
+            </td>
+
+            <td>
+            {{ student.name }}
+            </td>
+
+          <td>
+              {{ student.Department.Dept_Name }}
+          </td>
+
+          <td>
+              {{ student.Semester.Semester }}
+          </td>
+
+          <td>
+            {{ student.Section }}
+        </td>
+     
+        {% if student in Att.student.all %}
+            <td> <center>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <form method="post">{% csrf_token %}
+                      <input type="button" id="sections" class="btn btn-success" value="Present Marked"/><br>
+                  </form>
+
+            {% else %}
+
+            <td> <center>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <form action="{% url 'StudentAttendencePre' student.id student.Section %}" method="post">{% csrf_token %}
+                      <input type="submit" id="sections" class="btn btn-success" value="Present"/><br>
+                  </form>
+
+            {% endif %}
+
+
+            {% if student not in Att.student.all %}
+
+            <div style="margin-left:20px;" class="btn-group" role="group" aria-label="Basic example">
+                    <form action="{% url 'StudentAttendenceAbs' student.id student.Section %}" method="post">{% csrf_token %}
+                      <input type="submit" id="sections" class="btn btn-danger" value="Absent Marked"/><br>
+                  </form>
+                </center>
+              </td>
+
+              {% else %}
+
+              <div style="margin-left:20px;" class="btn-group" role="group" aria-label="Basic example">
+                <form action="{% url 'StudentAttendenceAbs' student.id student.Section %}" method="post">{% csrf_token %}
+                  <input type="submit" id="sections" class="btn btn-danger" value="Absent"/><br>
+              </form>
+            </center>
+          </td>
+
+            {% endif %}
+
+    </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-2">
+    {% include "students/student_list_sidebar.html" %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<a href="ShowCourses"><button class="btn btn-secondary" ><-- Back to Courses</button></a><br><br>
+<center><h2 style="font-family:bold;margin:50px;">ASSIGN DEPARTMENT TO TEACHER</h2></center><br>
+
+<div class="row">
+    <!-- SEMESTER LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Department</th>
+                    <th scope="col">Head Of Dept</th>
+                    <th scope="col">Dept Faculty</th>
+                    <th scope="col">Dept Courses</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in rem_dep %}
+                <tr>
+                    <td>{{ department.Dept_Name }}</td>
+                    <td>{{ department.HOD.Name }}</td>
+                    
+                    <td>{% for d in department.Faculty.all %}    
+                    {{ d.Name }}<br>
+                    {% endfor %}
+                
+                    {% for d in department.Faculty.all %}    
+                    {% empty %}
+                    No Faculty
+                    {% endfor %}</td>
+                    
+
+                    <td>{% for d in department.courses.all %}    
+                        {{ d.Course_Name }}<br>
+                        {% endfor %}
+                    
+                        {% for d in department.courses.all %}    
+                        {% empty %}
+                        No Courses
+                        {% endfor %}</td>
+
+                        <td><button class="btn btn-secondary"> Selected </button></td>
+    
+                </tr>
+                {% endfor %}
+
+                {% for department in add_dep %}
+                <tr>
+                    <td>{{ department.Dept_Name }}</td>
+                    <td>{{ department.HOD.Name }}</td>
+                    
+                    <td>{% for d in department.Faculty.all %}    
+                    {{ d.Name }}<br>
+                    {% endfor %}
+                
+                    {% for d in department.Faculty.all %}    
+                    {% empty %}
+                    No Faculty
+                    {% endfor %}</td>
+                    
+
+                    <td>{% for d in department.courses.all %}    
+                        {{ d.Course_Name }}<br>
+                        {% endfor %}
+                    
+                        {% for d in department.courses.all %}    
+                        {% empty %}
+                        No Courses
+                        {% endfor %}</td>
+
+                        <td><a href="{% url 'SelectCourseDep' department.id %}"><button class="btn btn-success"> Select </button></a></td>
+    
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

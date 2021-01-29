@@ -1,0 +1,87 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{q.Course}}<br>Quiz</h2></center><br>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col-md-5">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">start_Date</th>
+                    <th scope="col">end_Date</th>
+                    <th scope="col">Scored</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for q in q1 %}
+                    <tr>
+                        <td>{{q.Quiz.title}}</td>
+                        <td>{{q.Quiz.description}}</td>
+                        <td>{{q.Quiz.Section}}</td>
+                        <td>{{q.Quiz.start_Date}}</td>
+                        <td>{{q.Quiz.end_Date}}</td>
+                        {% if q.Scored > 5 %}
+                        <td class="alert alert-success">{{q.Scored}}/{{q.Quiz.Total_Marks}}</td>
+                        {% elif q.Scored < 5 %}
+                        <td class="alert alert-danger">{{q.Scored}}/{{q.Quiz.Total_Marks}}</td>
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+
+                    </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<center><h2 style="font-family:bold;margin:30px;">{{q.Course}}<br>Assignments</h2></center><br>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col-md-5">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">start_Date</th>
+                    <th scope="col">end_Date</th>
+                    <th scope="col">Scored</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for q in q1 %}
+                    <tr>
+                        <td>{{q.Quiz.title}}</td>
+                        <td>{{q.Quiz.description}}</td>
+                        <td>{{q.Quiz.Section}}</td>
+                        <td>{{q.Quiz.start_Date}}</td>
+                        <td>{{q.Quiz.end_Date}}</td>
+                        {% if q.Scored > 5 %}
+                        <td class="alert alert-success">{{q.Scored}}/{{q.Quiz.Total_Marks}}</td>
+                        {% elif q.Scored < 5 %}
+                        <td class="alert alert-danger">{{q.Scored}}/{{q.Quiz.Total_Marks}}</td>
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+
+                    </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}

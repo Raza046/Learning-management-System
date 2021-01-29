@@ -1,0 +1,47 @@
+{% extends 'dashboard.html' %}
+
+{% block dashboard-body %}
+
+<a href="ChangeDepartment"><button class="btn btn-secondary"><-- Back to Departments </button></a>
+<center><h2 style="font-family:bold;">ALL TEACHERS</h2></center><br>
+
+<h3 style="font-family:bold;">{{dep.Dept_Name|upper}} Department</h2>
+
+<div class="row" style="margin-top:80px;">
+  <div class="container-fluid">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for teacher in teachers %}
+          <tr>
+            <td>{{ teacher.Name }}</td>
+            <td>{{ teacher.Designation }}</td>
+            <td>{{ teacher.mobileNo|default_if_none:"" }}</td>
+            <td><button class="btn btn-success"> Selected </button></td>
+          </tr>
+          {% endfor %}
+
+          {% for teacher in add_hod %}
+          <tr>
+            <td>{{ teacher.Name }}</td>
+            <td>{{ teacher.Designation }}</td>
+            <td>{{ teacher.mobileNo|default_if_none:"" }}</td>
+            <td><a href="{% url 'SelectDepHOD' teacher.id %}"><button class="btn btn-primary"> Select </button></a></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

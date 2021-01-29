@@ -1,0 +1,66 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<br><br>
+
+<h3>Your Assignments</h3><br><br>
+
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title </th>
+                    <th scope="col">start_Date</th>
+                    <th scope="col">end_Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total_Marks</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% if ass %}
+
+                {% for ass1 in ass.all %}
+                <tr>
+                    <td>{{ass1.title}}</td>
+                    <td>{{ass1.start_Date}}</td>
+                    <td>{{ass1.end_Date}}</td>
+                    {% for a in ass1.AssignDetails.all %}
+                        {% if a.student == student %}
+                            <td>{{a.status}}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td><p style="margin-left:30px;">{{ass1.Total_Marks}}</p></td>
+                    <td><center><a href="{% url 'SeeAssignmentDetail' ass1.id %}"><button class="btn btn-primary"> View </button></a></center></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td>No Assignment yet.</td>
+                    <td>--------</td>
+                    <td>--------</td>
+                    <td>--------</td>
+                    <td>--------</td>
+                    <td>--------</td>
+                </tr>
+
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

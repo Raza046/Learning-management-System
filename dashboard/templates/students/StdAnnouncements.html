@@ -1,0 +1,57 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}} Section: {{s}}</h2></center><br>
+<br><br>
+
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Teacher</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">Announcement</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if Announce %}
+
+                {% for Announce1 in Announce %}
+                <tr>
+                    <td>{{Announce1.teacher}}</td>
+                    <td>{{Announce1.Course}}</td>
+                    <td>{{Announce1.Section}}</td>
+                    <td>{{Announce1.texts}}</td>
+                    <td>{{Announce1.start_Date}}</td>
+                    <td>{{Announce1.start_Time}}</td>
+                </tr>
+
+                {% endfor %}
+
+                {% else %}
+            
+                <tr>
+                    <td>No Announcement yet.</td>
+                    <td>----</td>
+                    <td>----</td>
+                    <td>----</td>
+                    <td>----</td>
+                    <td>----</td>
+                </tr>
+            
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

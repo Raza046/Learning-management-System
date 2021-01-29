@@ -1,0 +1,33 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<br><br>
+
+<h3>Please create Quiz Here</h3>
+
+<div class="row" style="margin-top:80px;">
+
+  <form action="{% url 'CreateQuiz' cs.id s %}" method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+  
+    <h5 style="font-family:bold;">Title : <input style="margin-left:17px;margin-top: 30px;" type="text" id="Name" class="fadeIn second" name="title" placeholder="Enter "></br>
+    <h5 style="font-family:bold;">Description : <input style="margin-left:17px;margin-top: 30px;" type="text" id="Name" class="fadeIn second" name="desc" placeholder="Enter "></br><br>
+    <label for="submission">Last Date:</label>
+    <input type="date" id="date" name="lastDate"><br><br>
+    <label for="submissionTime">End Time:</label>
+    <input type="time" id="times" name="EndTime">
+    <h5 style="font-family:bold;">Total Marks : <input style="margin-left:17px;margin-top: 30px;" type="number" id="Name" class="fadeIn second" name="marks" placeholder="Enter Marks "></br><br>
+    <input style="margin-top:20px; margin-left:300px;width:100px;" type="submit"   class="fadeIn fourth btn btn-danger" value="Publish">
+  
+  </form>
+  
+</div>
+
+
+{% endblock %}
+

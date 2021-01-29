@@ -1,0 +1,67 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}} Attendence</h2></center><br>
+<br><br>
+
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Teacher</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if Attnd %}
+
+                {% for atnd in Attnd %}
+                <tr>
+                    {% if atnd.Section == student.Section %}
+                        {% for ts in atnd.teacher.all %}
+                        <td>{{ts.Name}}</td>
+                        {% endfor %}
+                        <td>{{atnd.Day}}</td>
+                        <td>{{atnd.Course}}</td>
+                        <td>{{atnd.Time}}</td>
+                        <td>{{atnd.Date}}</td>
+                    {% else %}
+                    {% endif %}
+                    {% if student in atnd.student.all %}
+                    <td><div class="alert alert-success">
+                        <strong>Present</strong>
+                      </div></td><br>
+                      {% else %}
+                      <td><div class="alert alert-danger">
+                        <strong>Absent</strong>
+                      </div></td><br>
+                    {% endif %}
+
+                </tr>
+
+                {% endfor %}
+
+                {% else %}
+            
+                <tr>
+                    <td>No Class yet.</td>
+                </tr>
+            
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

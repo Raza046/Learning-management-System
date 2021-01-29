@@ -1,0 +1,73 @@
+{% extends 'dashboard.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+<div class="row">
+    <!-- SEMESTER LIST -->
+    <div class="col-md-9">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Department</th>
+                    <th scope="col">Head Of Dept</th>
+                    <th scope="col">Dept Faculty</th>
+                    <th scope="col">Dept Courses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                <tr>
+
+                    <td>{{ department.Dept_Name }}</td>
+
+                    {% if department.HOD %}
+                    <td>{{ department.HOD }}</td>
+                    {% else %}
+                    <td>No HOD </td>
+                    {% endif %}
+
+                    <td>{% for f in department.Faculty.all %}
+                        {{ f.Name }}</br>
+                        {% endfor %}
+                        {% for f in department.Faculty.all %}
+                        {% empty %}
+                        No Faculty </br>
+                        {% endfor %}                    
+                    </td>
+
+    
+                <td>{% for f in department.courses.all %}
+                    {{ f }} </br>
+                    {% endfor %}
+
+                    {% for f in department.courses.all %}                    
+                    {% empty %}
+                    No Courses </br>
+                    {% endfor %}                    
+            </td>
+
+            </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- SIDEBAR -->
+    <div class="col-md-3">
+        <ul class="list-group">
+            {% if request.user.user_type == 2 or request.user.user_type == 1 %}
+
+            {% else %}
+
+        </br><center><a href="addDepartments"><button style="width: 175px;" class="btn btn-primary">Add Department</button></a></center></br>
+            <center><a href="ChangeDepartment"><button class="btn btn-success">Manage Department</button></a></center>
+        </div>
+        {% endif %}
+
+    </div>
+            </div>
+        </ul>
+    </div> <!-- /sidebar -->
+</div>
+{% endblock %}

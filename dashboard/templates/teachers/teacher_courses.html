@@ -1,0 +1,38 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">YOUR COURSES</h2></center><br>
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Credit Hours</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in t.Courses.all %}
+                <tr>
+                    <td>{{ course.Course_Id }}</td>
+                    <td>{{ course.Course_Name }}</td>
+                    <td>{{ course.Department }}</td>
+                    <td>{{ course.credit_hours }}</td>
+                    <td><a href="{% url 'ViewTeacherCoursesDetails' course.id %}"><button class="btn btn-success"> View </button></a></td>
+    
+                {% endfor %}
+            </tr>
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

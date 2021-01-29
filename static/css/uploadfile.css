@@ -1,0 +1,14 @@
+.choose::-webkit-file-upload-button {
+    color: white;
+    display: inline-block;
+    background: #d9534f;
+    border: 20px;
+    margin-left:104px;
+    padding: 9px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 13pt;
+  
+  }

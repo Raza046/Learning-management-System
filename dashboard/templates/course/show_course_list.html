@@ -1,0 +1,36 @@
+{% extends 'dashboard.html' %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<a href="courseList"><button class="btn btn-secondary" ><-- Back to Courses</button></a><br><br>
+<center><h2 style="font-family:bold;margin:50px;">MANAGE COURSES</h2></center><br>
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Course ID</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Credit Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in all_course %}
+                <tr>
+                    <td>{{ course.Course_Id }}</td>
+                    <td>{{ course.Course_Name }}</td>
+                    <td>{{ course.Department }}
+                    <a style="margin-left:10px;" href="{% url 'AddCourseDep' course.id %}"><button class="btn btn-danger">Add/Change</button></a></td>
+                    <td>{{ course.credit_hours }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

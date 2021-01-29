@@ -1,0 +1,60 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_header %}
+  <link rel="stylesheet" href="{% static 'js/tagify/tagify.css' %}">
+{% endblock %}
+
+{% block dashboard-body %}
+
+
+<center><h2 style="font-family:bold;">TEACHER REGISTRATION</h2></center>
+
+<div class="alert alert-danger">
+  <p>Fill up all the required field first, then click <em>Admit Teacher</em></p>
+</div>
+
+<form action="Add_Teacher" method="POST" enctype="multipart/form-data">
+    
+  {% csrf_token %}
+
+  <h5 style="font-family:bold;">Username :<input style="margin-top:50px;margin-left:150px;" type="text" id="login" class="fadeIn second" name="username" placeholder="Username"></h5></br>
+  <h5 style="font-family:bold;">Email :<input style="margin-left:180px;margin-top: 30px;" type="email" id="email" class="fadeIn second" name="email" placeholder="Email"></br>
+  <h5 style="font-family:bold;">Password :<input style="margin-left:150px;margin-top: 30px;" type="password" id="password" class="fadeIn third" name="password" placeholder="Password"></br>
+  <h5 style="font-family:bold;">Confirm  Password :<input style="margin-left:76px;;margin-top: 30px;" type="password" id="password1" class="fadeIn third" name="password1" placeholder="Confirm Password"></br>
+  <h5 style="font-family:bold;">Name : <input style="margin-left:175px;margin-top: 30px;" type="text" id="Name" class="fadeIn second" name="Name" placeholder="Name"></br>
+  <h5 style="font-family:bold;">Photo : <input style="margin-left:175px;margin-top:30px;" type="file" name="photo" >
+  <h5 style="font-family:bold;">Date Of Birth : <input style="margin-left:110px;margin-top: 30px;" type="text" id="Date_of_birth" class="fadeIn second" name="Date_of_birth" placeholder="Date_of_birth"></br>
+  <h5 style="font-family:bold;">Designation : <input style="margin-left:123px;margin-top: 30px;" type="text" id="Designation" class="fadeIn second" name="Designation" placeholder="Designation"></br>
+  <h5 style="font-family:bold;">MobileNo : <input style="margin-left:133px;margin-top: 30px;" type="number" id="mobileNo" class="fadeIn second" name="mobileNo" placeholder="mobileNo"></br><br>
+  
+    <input style="margin-top:20px;margin-left:300px;width:100px;" type="submit"   class="fadeIn fourth btn btn-danger" value="Register">
+ 
+  </form>
+
+
+
+<!-- 
+<form action="." method="POST" class="admission-form d-block" enctype='multipart/form-data'>
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input class="btn btn-dark float-right" type="submit" value="Save">
+</form> -->
+{% endblock %}
+
+<!-- {% block extrajs %}
+    <script src="{% static 'js/tagify/tagify.min.js' %}"></script>
+    <script>
+      {# Select image #}
+      $('input[type="file"]').change(function(e){
+        const fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+      });
+
+      {# Tagify #}
+      const input = document.getElementById('id_expertise'),
+	        tagify = new Tagify( input, {duplicates: false} );
+
+    </script>
+{% endblock %} -->

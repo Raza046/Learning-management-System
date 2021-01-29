@@ -1,0 +1,125 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{q.Course}}<br>Quiz</h2></center><br>
+
+<div class="row">
+    <div class="container-fluid">
+      <div class="col-5">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Title</th>
+              <td>{{q.title}}</td>
+            </tr>
+            
+            <tr>
+              <th scope="col">Description</th>
+              <td>{{q.description}}</td>
+            </tr>
+  
+            <tr>
+                <th scope="col">Teacher</th>
+                <td>{{q.teacher}}</td>
+              </tr>
+
+              <tr>
+              <th scope="col">Start Date</th>
+              <td>{{q.start_Date}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Start Time</th>
+                <td>{{q.start_Time}}</td>
+              </tr>
+
+              <tr>
+                <th scope="col">Last Date</th>
+                <td>{{q.end_Date}}</td>
+              </tr>
+      
+            <tr>
+              <th scope="col">End Time</th>
+              <td>{{q.end_Time}}</td>
+            </tr>
+
+            <tr>
+              <th scope="col">Total_Marks</th>
+              <td>{{q.Total_Marks}}</td>
+            </tr>
+
+          </thead>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="head2" style="margin-top:30px;margin-bottom:80px;">All Questions</h1>
+
+    {% for qs in q.QuestionAns.all %}
+      
+      <div class='body1'>
+
+          <div class="row">
+
+            <div class="col-sm-8 setts1" style="margin-left:55px;background-color:white;border-radius:10px;">
+                  <h4>
+                    <p style="margin-top:10px;"><b style="margin-left:60px;">Q{{forloop.counter}}. {{qs.question}}</b></p>
+                      </h4>
+                  <div class="q-lbtm-content">
+                      <div class="textStyle" style="margin-top:25px;margin-left:60px;">
+
+                        {% for a in ans.all %}
+
+                          {% if a.Question == qs %}
+
+                          {% for qs1 in qs.MCQAns.all %}
+
+                          {% if qs1.Correct_Ans == "Yes" and a.Answers == qs1.Answers %}
+                          <b><p style="color:green;">{{forloop.counter}}. {{qs1.Answers}} <span style='margin-left:100px;font-size:20px;'>&#10004;</span></p></b>
+
+                          {% elif a.Answers == qs1.Answers %}
+                          <b><p style="color:red;">{{forloop.counter}}. {{qs1.Answers}} <span style='margin-left:100px;font-size:20px;'>&#10006;</span></p></b>
+
+                          {% elif qs1.Correct_Ans == "Yes" %}
+                          <b><p style="color:yellowgreen">{{forloop.counter}}. {{qs1.Answers}} <span style='margin-left:100px;font-size:20px;'>&#10004;</span></p></b>
+
+                          {% else %}
+                          <p style="color:black;">{{forloop.counter}}. {{qs1.Answers}}</p>
+
+                          {% endif %}
+
+                            {% endfor %}
+                          {% endif %}
+
+                        {% endfor %}
+
+                      </div>
+      
+                      <hr style="margin-top:20px">
+                 
+                      <div class="question-cat" style="margin-left:16px;">
+                          <ul class="ul1">
+                                  <li style="margin-top:-10px">
+                                      <p>{{qs.Marks}} Marks</p>
+                                      </li>
+                          </ul>                      
+                      </div>
+                  </div>
+              </div>
+                </div> <br><br>
+
+        {% endfor %}<br><br>
+
+
+        <div class="question-cat" style="margin-left:16px;">
+          <ul class="ul1">
+                  <li style="margin-top:-10px">
+                      <h4> <b>{{score}}</b> Marks out of <b>{{q.Total_Marks}}</b></h4>
+                      </li>
+          </ul>
+      </div>
+
+{% endblock %}

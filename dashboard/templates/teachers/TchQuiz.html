@@ -1,0 +1,50 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<br><br>
+
+<h3>Your Quizs</h3><br><br>
+
+<a href="{% url 'CreateQuiz' cs.id s %}" style="margin-left:770px;"><button class="btn btn-danger" style="margin-bottom:20px;margin-top:-120px;padding:10px;padding-right:40px;padding-left:40px;"> Create New Quiz </button></a>
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title </th>
+                    <th scope="col">Description</th>
+                    <th scope="col">start_Date</th>
+                    <th scope="col">end_Date</th>
+                    <th scope="col">Total_Marks</th>
+                    <th scope="col">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for quiz in q.all %}
+                <tr>
+                    <td>{{quiz.title}}</td>
+                    <td>{{quiz.description}}</td>
+                    <td>{{quiz.start_Date}}</td>
+                    <td>{{quiz.end_Date}}</td>
+                    <td>{{quiz.Total_Marks}}</td>
+                    <td><center><a href="{% url 'ViewTchQuiz' quiz.id quiz.Section %}"><button class="btn btn-primary"> View </button></a></center></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

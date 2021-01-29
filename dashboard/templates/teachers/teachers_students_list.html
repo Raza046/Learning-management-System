@@ -1,0 +1,64 @@
+{% extends base_template %}
+
+{% block dashboard-body %}
+
+<div class="row">
+  <div class="col-10">
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Registration</th>
+          <th scope="col">Name</th>
+          <th scope="col">Department</th>
+          <th scope="col">Semester</th>
+          <th scope="col">Section</th>
+          <th scope="col">Attendence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in std_all %}
+        <tr>
+          <td>
+              {{ student.RegistrationNo }}
+            </td>
+
+            <td>
+            {{ student.name }}
+            </td>
+
+          <td>
+              {{ student.Department.Dept_Name }}
+          </td>
+
+          <td>
+              {{ student.Semester }}
+          </td>
+
+          <td>
+            {{ student.Section }}
+        </td>
+
+        <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <form action="{% url 'StudentAttendencePre' student.id student.Section %}" method="post">{% csrf_token %}
+                <input type="submit" id="sections" class="btn btn-success" value="{{student.Section}}"/><br>
+            </form>
+
+              <a href="#"><button type="button" style="margin-left:10px;" class="btn btn-danger">
+                Absent
+              </button></a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="col-2">
+    {% include "students/student_list_sidebar.html" %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'dashboard.html' %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;">ALL TEACHERS</h2></center>
+
+
+<div class="row" style="margin-top:80px;">
+  <div class="container-fluid">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Designation</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for teacher in teachers %}
+          <tr>
+            <td>{{ teacher.Name }}</td>
+            <td>{{ teacher.Designation }}</td>
+            <td>{{ teacher.mobileNo|default_if_none:"" }}</td>
+           <td><a href="{% url 'detailTeacher' teacher.id %}"><button class="btn btn-primary"> View Profile </button></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

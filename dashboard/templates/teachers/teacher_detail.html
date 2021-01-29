@@ -1,0 +1,100 @@
+{% extends base_template %}
+
+{% load static %}
+
+{% block dashboard-body %}
+
+<center>
+<section id="teacher-detail-section">
+  <div id="teacher-detail-section--inner">
+    <div class="container">
+      <div class="row py-5">
+        <div class="col-4">
+         <center><img class="teacher-profile-img"
+             {% if teacher.photo %}
+                src="{{ teacher.photo.url }}"
+             {% else %}
+                {% static 'images/money.jpg' %}
+             {% endif %}
+            alt="" width="150" height="150"></center>
+        </div>
+        <div class="col-8">
+          <h2>{{ teacher.Name }}</h2>
+          <p></p>
+          <a href="" class="btn btn-danger">Delete Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row" style="margin-top:80px;">
+  <div class="container-fluid">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead >
+          <tr>
+            <th scope="col">Name</th>
+            <td>{{ teacher.Name }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Designation</th>
+            <td>{{ teacher.Designation }}</td>
+          </tr>
+
+          <tr>
+            <th scope="col">Contact</th>
+            <td>{{ teacher.mobileNo|default_if_none:"" }}</td>
+          </tr>
+
+          <tr>
+            <th scope="col">Date Of Birth</th>
+            <td>{{ teacher.Date_of_birth }}</td>
+          </tr>
+          
+          <tr>
+            <th scope="col">Department</th>
+            <td>{{ teacher.Department }}</td>
+
+            {% if request.user.user_type == 2 or request.user.user_type == 1 %}
+
+            {% else %}
+
+            {% if teacher.Department %}
+            <td><center><a href="{% url 'AddDepTeach' teacher.id %}"><button class="btn btn-primary">Change Department</button></a></center></td>
+            {% else %}
+            <td><center><a href="{% url 'AddDepTeach' teacher.id %}"><button class="btn btn-primary">ADD Department</button></a></center></td>
+            {% endif %}
+
+          {% endif %}
+
+          </tr>
+
+          <tr>
+            <th scope="col">Courses</th>
+            {% if teacher.Courses %}
+            <td>{% for c in teacher.Courses.all %}
+                {{ c }}<br>
+              {% endfor %}</td>
+            {% else %}
+            <td>No courses yet</td>
+            {% endif %}
+
+            {% if request.user.user_type == 2 or request.user.user_type == 1 %}
+
+            {% else %}
+
+            <td><center><a href="{% url 'showCourseTeach' teacher.id %}"><button class="btn btn-primary">Add Course</button></a></center></td>
+            {% endif %}
+
+            </tr>
+
+        </thead>
+      </table>
+
+    </div>
+  </div>
+</div>
+</center>
+
+{% endblock %}

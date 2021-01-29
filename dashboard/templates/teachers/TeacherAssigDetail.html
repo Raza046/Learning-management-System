@@ -1,0 +1,133 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{ass.Course}}</h2></center><br>
+<br><br>
+
+<h3>Assignment Detail</h3><br><br>
+
+<div class="row" style="margin-top:80px;">
+    <div class="container-fluid">
+      <div class="col-5">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Title</th>
+              <td>{{ass.title}}</td>
+            </tr>
+            
+            <tr>
+              <th scope="col">Description</th>
+              <td>{{ass.description}}</td>
+            </tr>
+  
+            <tr>
+                <th scope="col">Teacher</th>
+                <td>{{ass.teacher}}</td>
+              </tr>
+
+              <tr>
+              <th scope="col">Start Date</th>
+              <td>{{ass.start_Date}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Start Time</th>
+                <td>{{ass.start_Time}}</td>
+              </tr>
+
+              <tr>
+                <th scope="col">Last Date</th>
+                <td>{{ass.end_Date}}</td>
+              </tr>
+      
+            <tr>
+              <th scope="col">End Time</th>
+              <td>{{ass.end_Time}}</td>
+            </tr>
+
+            <tr>
+              <th scope="col">Total_Marks</th>
+              <td>{{ass.Total_Marks}}</td>
+            </tr>
+
+          </thead>
+            </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- COURSE LIST -->
+        <div class="col-md-12">
+            <table class="table border">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col-md-5">Reg No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Submission</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Scored</th>
+                        <th scope="col">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {% for d in ass.AssignDetails.all %}
+                    <tr>
+                        <td>{{d.student.RegistrationNo}}</td>
+                        <td>{{d.student.name}}</td>
+                        <td><a href="{{d.Submission.url}}" download  class="btn btn-danger">Download</a></td>
+                        {% if d.Sub_Details %}
+                        <td>{{d.Sub_Details}}</td>
+                        {% else %}
+                        <td><p style="margin-left:30px;">-----</p></td>
+                        {% endif %}
+                        {% if d.Scored %}
+                        <td>{{d.Scored}}</td>
+                        {% else %}
+                        <td>Unmarked</td>
+                        {% endif %}
+                        <td><a href="{% url 'ViewStdAssign' d.id %}" class="btn btn-primary">View</a></td>
+                      </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    <!-- <form action="{% url 'SeeAssignmentDetail' ass.id %}" method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    
+    <div class="frame">
+        <div class="center"><br><br>
+            <center>
+            <div class="title">
+                <h1>Attach Assignment file</h1>
+            </div></center><br><br>
+
+            <center>
+                <img src="http://100dayscss.com/codepen/upload.svg" class="upload-icon" height="70px" /><br><br>
+                <label>Attach your file</label><br>
+                <input type="file" name="myfile" style="margin-left:-11px;" multiple class="choose">
+            </center>
+            <br><br>
+        </div>
+    </div>
+
+
+    <h5 class="title">Assignment Description : <input style="margin-left:17px;margin-top:30px;padding:10px;padding-right:120px;" type="text" id="Name" class="fadeIn second" name="description" placeholder="Describe your Assignment here.."></br><br><br>
+
+        <center>
+            <input style="margin-top:20px;margin-bottom:50px;width:100px;" type="submit"   class="fadeIn fourth btn btn-danger" value="Submit">
+        </center>
+
+</form> -->
+  
+
+{% endblock %}

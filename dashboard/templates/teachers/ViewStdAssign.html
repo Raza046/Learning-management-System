@@ -1,0 +1,111 @@
+{% extends base_template %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{ass.Course}}</h2></center><br>
+<br><br>
+
+<h3>Assignment Detail</h3><br><br>
+
+<div class="row" style="margin-top:80px;">
+    <div class="container-fluid">
+      <div class="col-5">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Title</th>
+              <td>{{ass.Assignment.title}}</td>
+            </tr>
+            
+            <tr>
+              <th scope="col">Description</th>
+              <td>{{ass.Assignment.description}}</td>
+            </tr>
+  
+            <tr>
+                <th scope="col">Teacher</th>
+                <td>{{ass.Assignment.teacher}}</td>
+              </tr>
+
+              <tr>
+              <th scope="col">Start Date</th>
+              <td>{{ass.Assignment.start_Date}}</td>
+            </tr>
+            <tr>
+                <th scope="col">Start Time</th>
+                <td>{{ass.Assignment.start_Time}}</td>
+              </tr>
+
+              <tr>
+                <th scope="col">Last Date</th>
+                <td>{{ass.Assignment.end_Date}}</td>
+              </tr>
+      
+            <tr>
+              <th scope="col">End Time</th>
+              <td>{{ass.Assignment.end_Time}}</td>
+            </tr>
+
+            <tr>
+              <th scope="col">Total_Marks</th>
+              <td>{{ass.Assignment.Total_Marks}}</td>
+            </tr>
+
+            {% if ass.Scored %}
+            <tr>
+                <th scope="col">Scored</th>
+                <td>{{ass.Scored}}</td>
+              </tr>
+              {% else %}
+              <tr>
+                <th scope="col">Scored</th>
+                <td>Unmarked</td>
+              </tr>
+              {% endif %}
+  
+              {% if ass.Remarks %}
+              <tr>
+                  <th scope="col">Remarks</th>
+                  <td>{{ass.Remarks}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                  <th scope="col">Remarks</th>
+                  <td>No Remarks yet.</td>
+                </tr>
+                {% endif %}
+
+            </thead>
+            </table>
+            </div>
+        </div>
+    </div>
+    
+
+<form action="{% url 'ViewStdAssign' ass.id %}" method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    
+    <div class="frame">
+        <div class="center"><br><br>
+            
+            <div class="title">
+                <h3>ADD MARKS</h3>
+                <h5 class="title">Give marks : <input style="margin-left:17px;margin-top:30px;padding:7px;" type="number" id="score" class="fadeIn second" name="marks" required>
+                </div><br><br>
+        </div>
+    </div>
+
+
+    <h5 class="title">Give Remarks : <input style="margin-left:17px;margin-top:30px;padding:10px;padding-right:120px;" type="text" id="Name" class="fadeIn second" name="Remarks" placeholder="Describe your Assignment here.."></br><br><br>
+
+        <center>
+            <input style="margin-top:20px;margin-bottom:50px;width:100px;" type="submit"   class="fadeIn fourth btn btn-danger" value="Submit" required>
+        </center>
+
+</form>
+
+
+{% endblock %}

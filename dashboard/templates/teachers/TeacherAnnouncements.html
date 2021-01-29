@@ -1,0 +1,29 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}}</h2></center><br>
+<br><br>
+
+<h3>Please create Announcements Here</h3>
+
+
+<div class="row" style="margin-top:80px;">
+            
+            <form action="{% url 'CreateAnnouncements' cs.id s %}" method="POST">
+    
+              {% csrf_token %}
+            
+              {{form}}
+              <!-- <h5 style="font-family:bold;">Enter Announcement : <input style="margin-top:50px;" type="text" id="announc" class="fadeIn second" name="Announce1" placeholder="Announcement">-->
+              <input style="margin-top:20px;" type="submit" class="fadeIn fourth" value="Publish">
+            
+            </form>
+</div>
+
+
+{% endblock %}
+
+
+

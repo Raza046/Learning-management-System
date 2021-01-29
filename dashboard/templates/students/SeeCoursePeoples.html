@@ -1,0 +1,39 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}} People</h2></center><br>
+<br><br>
+
+
+<div class="row">
+    <!-- COURSE LIST -->
+    <div class="col-md-12">
+        <table class="table border">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Reg. No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Section</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for people in p %}
+                <tr>
+                    <td>{{people.RegistrationNo}}</td>
+                    <td>{{people.name}}</td>
+                    <td>{{people.Section}}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

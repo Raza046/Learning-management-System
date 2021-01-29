@@ -1,0 +1,21 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+<center><h2 style="font-family:bold;margin:50px;">{{cs.Course_Name}} Section: {{std.Section}}</h2></center><br>
+<h2>{{std.name}}</h2>
+<br><br>
+
+
+<a href="{% url 'SeePeoples' cs.id %}"><button class="btn btn-primary"> Peoples </button></a>
+<a href="{% url 'CourseGrades' cs.id  std.Section %}"><button class="btn btn-danger"> Grades </button></a>
+<a href="{% url 'SeeAnnouncements' cs.id  std.Section %}"><button class="btn btn-info"> Announcements </button></a>
+<a href="{% url 'SeeAttendence' cs.id %}"><button class="btn btn-primary"> Attendence </button></a>
+<a href="{% url 'SeeAssignment' cs.id std.Section %}"><button class="btn btn-success"> Assignments </button></a>
+<a href="{% url 'ViewStdQuiz' cs.id std.Section %}"><button class="btn btn-danger"> Quizes </button></a>
+<a href="peoples"><button class="btn btn-success"> Resources </button></a>
+
+
+
+{% endblock %}

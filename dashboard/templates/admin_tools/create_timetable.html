@@ -1,0 +1,518 @@
+{% extends base_template %}
+{% load crispy_forms_tags %}
+
+{% block dashboard-body %}
+
+    <h1>CREATE TIME TABLE</h1> 
+
+<tr>
+        <td align="center" height="50" 
+            width="100"><br> 
+            <b>Day</b>
+        </td>
+
+        <td><a href=""><button class="btn btn-danger" style="margin-left:100px;"> Monday </button></a></td>
+        <td><a href=""><button class="btn btn-danger" style="margin-left:70px;"> Tuesday </button></a></td>
+        <td><a href=""><button class="btn btn-danger" style="margin-left:70px;"> Wednesday </button></a></td>
+        <td><a href=""><button class="btn btn-danger" style="margin-left:70px;"> Thursday </button></a></td>
+        <td><a href=""><button class="btn btn-danger" style="margin-left:70px;"> Friday </button></a></td>
+
+    </tr>
+
+
+    <tr> <br><br>
+
+
+        {% for tt1 in TT %}
+
+        {% for tt2 in tt1.Details.all %}
+
+
+        {% if tt2.Day == "Monday" %}
+
+               {% if tt2.Time == "8:30 - 9:20" %}
+
+
+               <td> <td> 8:30 - 9:20 </td>
+               <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+                <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                    <button class="btn btn-primary">Add/Change
+                    <input type="hidden" name="change1" id="change1" value="Monday 8:30 - 9:20" /></button>
+                </form></td>
+                </td>
+                
+                {% endif %}
+
+
+
+                {% elif tt2.Day == "Tuesday" %}
+
+                {% if tt2.Time == "8:30 - 9:20" %}
+                <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+                <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                    <button class="btn btn-primary">Add/Change
+                    <input type="hidden" name="change1" id="change1" value="Tuesday 8:30 - 9:20" /></button>
+                </form></td>
+
+                {% endif %}
+
+
+
+                {% elif tt2.Day == "Wednesday" %}
+
+                {% if tt2.Time == "8:30 - 9:20" %}
+                <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+                <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                    <button class="btn btn-primary">Add/Change
+                    <input type="hidden" name="change1" id="change1" value="Wednesday 8:30 - 9:20" /></button>
+                </form></td>
+
+
+                {% endif %}
+
+
+                {% elif tt2.Day == "Thursday" %}
+
+                {% if tt2.Time == "8:30 - 9:20" %}
+                <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+                 <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                    <button class="btn btn-primary">Add/Change
+                    <input type="hidden" name="change1" id="change1" value="Thursday 8:30 - 9:20" /></button>
+                </form></td>
+                 {% endif %}
+                
+
+                {% elif tt2.Day == "Friday" %}
+
+                {% if tt2.Time == "8:30 - 9:20" %}
+
+                <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+                <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                    <button class="btn btn-primary">Add/Change
+                    <input type="hidden" name="change1" id="change1" value="Friday 8:30 - 9:20" /></button>
+                </form></td>
+                {% endif %}
+                        
+
+
+            {% endif %}
+        
+        {% endfor %}
+
+    {% endfor %}
+
+</tr>
+
+
+
+<tr> <br><br>
+
+
+    {% for tt1 in TT %}
+
+    {% for tt2 in tt1.Details.all %}
+
+
+    {% if tt2.Day == "Monday" %}
+
+           {% if tt2.Time == "9:20 - 10:10" %}
+
+
+           <td> <td> 9:20 - 10:10 </td>
+           <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Monday 9:20 - 10:10" /></button>
+            </form></td>
+            </td>
+            
+            {% endif %}
+
+
+
+            {% elif tt2.Day == "Tuesday" %}
+
+            {% if tt2.Time == "9:20 - 10:10" %}
+            <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Tuesday 9:20 - 10:10" /></button>
+            </form></td>
+
+            {% endif %}
+
+            {% elif tt2.Day == "Wednesday" %}
+
+            {% if tt2.Time == "9:20 - 10:10" %}
+            <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Wednesday 9:20 - 10:10" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Thursday" %}
+
+            {% if tt2.Time == "9:20 - 10:10" %}
+            <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+             <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Thursday 9:20 - 10:10" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Friday" %}
+
+            {% if tt2.Time == "9:20 - 10:10" %}
+
+            <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Friday 9:20 - 10:10" /></button>
+            </form></td>
+            </form></td>
+            {% endif %}
+
+        {% endif %}
+    
+    {% endfor %}
+
+{% endfor %}
+
+</tr>
+
+
+
+<tr> <br><br>
+
+
+    {% for tt1 in TT %}
+
+    {% for tt2 in tt1.Details.all %}
+
+
+    {% if tt2.Day == "Monday" %}
+
+           {% if tt2.Time == "10:10 - 11:00" %}
+
+
+           <td> <td> 10:10 - 11:00 </td>
+           <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Monday 10:10 - 11:00" /></button>
+            </form></td>
+            </td>
+            
+            {% endif %}
+
+
+
+            {% elif tt2.Day == "Tuesday" %}
+
+            {% if tt2.Time == "10:10 - 11:00" %}
+            <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Tuesday 10:10 - 11:00" /></button>
+            </form></td>
+
+            {% endif %}
+
+            {% elif tt2.Day == "Wednesday" %}
+
+            {% if tt2.Time == "10:10 - 11:00" %}
+            <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Wednesday 10:10 - 11:00" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Thursday" %}
+
+            {% if tt2.Time == "10:10 - 11:00" %}
+            <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+             <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Thursday 10:10 - 11:00" /></button>
+            </form></td>
+            {% endif %}
+
+
+            {% elif tt2.Day == "Friday" %}
+
+            {% if tt2.Time == "10:10 - 11:00" %}
+
+            <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Friday 10:10 - 11:00" /></button>
+            </form></td>
+            {% endif %}                    
+
+        {% endif %}
+    
+    {% endfor %}
+
+{% endfor %}
+
+
+
+<tr> <br><br>
+
+
+    {% for tt1 in TT %}
+
+    {% for tt2 in tt1.Details.all %}
+
+
+    {% if tt2.Day == "Monday" %}
+
+           {% if tt2.Time == "11:00 - 11:50" %}
+
+           <td> <td> 11:00 - 11:50 </td>
+           <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Monday 11:00 - 11:50" /></button>
+            </form></td>
+            </td>
+            
+            {% endif %}
+
+
+
+            {% elif tt2.Day == "Tuesday" %}
+
+            {% if tt2.Time == "11:00 - 11:50" %}
+            <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Tuesday 11:00 - 11:50" /></button>
+            </form></td>
+
+            {% endif %}
+
+            {% elif tt2.Day == "Wednesday" %}
+
+            {% if tt2.Time == "11:00 - 11:50" %}
+            <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Wednesday 11:00 - 11:50" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Thursday" %}
+
+            {% if tt2.Time == "11:00 - 11:50" %}
+            <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+             <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Thursday 11:00 - 11:50" /></button>
+            </form></td>
+             {% endif %}
+
+
+            {% elif tt2.Day == "Friday" %}
+
+            {% if tt2.Time == "11:00 - 11:50" %}
+
+            <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Friday 11:00 - 11:50" /></button>
+            </form></td>
+            {% endif %}                    
+
+        {% endif %}
+    
+    {% endfor %}
+
+{% endfor %}
+
+
+
+<tr> <br><br>
+
+
+    {% for tt1 in TT %}
+
+    {% for tt2 in tt1.Details.all %}
+
+
+    {% if tt2.Day == "Monday" %}
+
+           {% if tt2.Time == "11:50 - 12:40" %}
+
+           <td> <td> 11:50 - 12:40 </td>
+           <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Monday 11:50 - 12:40" /></button>
+            </form></td>
+            </td>
+            
+            {% endif %}
+
+
+
+            {% elif tt2.Day == "Tuesday" %}
+
+            {% if tt2.Time == "11:50 - 12:40" %}
+            <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Tuesday 11:50 - 12:40" /></button>
+            </form></td>
+
+            {% endif %}
+
+            {% elif tt2.Day == "Wednesday" %}
+
+            {% if tt2.Time == "11:50 - 12:40" %}
+            <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Wednesday 11:50 - 12:40" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Thursday" %}
+
+            {% if tt2.Time == "11:50 - 12:40" %}
+            <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+             <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Thursday 11:50 - 12:40" /></button>
+            </form></td>
+             {% endif %}
+
+
+            {% elif tt2.Day == "Friday" %}
+
+            {% if tt2.Time == "11:50 - 12:40" %}
+
+            <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Friday 11:50 - 12:40" /></button>
+            </form></td>
+            {% endif %}                    
+
+        {% endif %}
+    
+    {% endfor %}
+
+{% endfor %}
+
+
+
+<tr> <br><br>
+
+
+    {% for tt1 in TT %}
+
+    {% for tt2 in tt1.Details.all %}
+
+
+    {% if tt2.Day == "Monday" %}
+
+           {% if tt2.Time == "12:40 - 1:30" %}
+
+           <td> <td> 12:40 - 1:30 </td>
+           <p style="margin-left:150px;margin-top:-30px"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:120px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Monday 12:40 - 1:30" /></button>
+            </form></td>
+            </td>
+            
+            {% endif %}
+
+
+
+            {% elif tt2.Day == "Tuesday" %}
+
+            {% if tt2.Time == "12:40 - 1:30" %}
+            <p style="margin-left:320px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:280px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Tuesday 12:40 - 1:30" /></button>
+            </form></td>
+
+            {% endif %}
+
+            {% elif tt2.Day == "Wednesday" %}
+
+            {% if tt2.Time == "12:40 - 1:30" %}
+            <p style="margin-left:480px;margin-top:-65px;"> {{tt2.Course.Course_Id}} </p>
+
+            <td> <form style="margin-left:450px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Wednesday 12:40 - 1:30" /></button>
+            </form></td>
+
+            {% endif %}
+
+
+            {% elif tt2.Day == "Thursday" %}
+
+            {% if tt2.Time == "12:40 - 1:30" %}
+            <p style="margin-left:660px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+
+             <td> <form style="margin-left:630px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Thursday 12:40 - 1:30" /></button>
+            </form></td>
+             {% endif %}
+
+
+            {% elif tt2.Day == "Friday" %}
+
+            {% if tt2.Time == "12:40 - 1:30" %}
+
+            <p style="margin-left:820px;margin-top:-60px;"> {{tt2.Course.Course_Id}} </p>
+            <td> <form style="margin-left:790px;margin-top:0px;" action="AddCoursesToTimetable" method="post">{% csrf_token %}
+                <button class="btn btn-primary">Add/Change
+                <input type="hidden" name="change1" id="change1" value="Friday 12:40 - 1:30" /></button>
+            </form></td>
+            {% endif %}                    
+
+        {% endif %}
+    
+    {% endfor %}
+
+{% endfor %}
+
+
+
+{% endblock %}

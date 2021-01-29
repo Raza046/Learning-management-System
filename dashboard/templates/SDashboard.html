@@ -1,0 +1,225 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>LMS</title>
+  <!-- FONT AWESOME KIT -->
+  <script src="https://kit.fontawesome.com/16475baae0.js" crossorigin="anonymous"></script>
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+  <!-- BOOTSTRAP4 CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  {% block extra_header %}
+
+  {% endblock %}
+
+  <link rel="stylesheet" href="{% static 'css/uploadfile.css' %}">
+  <link rel="stylesheet" href="{% static 'css/timetable.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link rel="icon" href="{% static 'images/favicon.png' %}">
+</head>
+
+<body class="bg-light">
+
+  <section id="dashboard">
+    <div class="container-fluid">
+      <div class="dashboard-container row">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-2 sidenav">
+          <div class="logo">
+            <h4>LMS</h4>
+          </div>
+          <div class="sn-group">
+            <a href="StudentDashboard" class="sn-link dash-home">
+              <i class="fas fa-tachometer-alt"></i>Student Dashboard
+            </a>
+          </div>
+
+          <div class="sn-group">
+            <h5>import</h5>
+            <nav>
+              <a class="sn-link" href="">
+                <i class="fas fa-book"></i>subjects from csv
+              </a>
+            </nav>
+          </div>
+          <div class="sn-group">
+            <h5>Students</h5>
+            <nav>
+              <a href="all_student" class="sn-link">
+                <i class="fas fa-th-list"></i>all student
+              </a>
+              <a href="std_result" class="sn-link">
+                <i class="fas fa-poll"></i>result
+              </a>
+            </nav>
+          </div>
+          <div class="sn-group">
+            <h5>Teachers</h5>
+            <nav>
+              <a href="all_teachers" class="sn-link">
+                <i class="fas fa-th-list"></i>teachers
+              </a>
+            </nav>
+          </div>
+          <div class="sn-group">
+            <h5>Courses</h5>
+            <nav>
+              <a class="sn-link" href="">
+                <i class="fas fa-user-tie"></i>Course
+              </a>
+              <a class="sn-link" href="">
+                <i class="fas fa-user-tie"></i>Section
+              </a>
+              <a class="sn-link" href="">
+                <i class="fas fa-user-tie"></i>Attendance
+              </a>
+            </nav>
+          </div>
+
+        </div>
+        <!-- END OF SIDENAV -->
+
+        <!-- START DASHBOARD BODY -->
+        <div class="col-12 col-sm-12 col-md-8 col-lg-10 px-0 dashbody">
+          <!-- NAVIGATION TOP -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light shadow py-3 px-5">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <form id="searchForm" class="form-inline">
+                <input class="form-control" type="search" placeholder="Search for..." aria-label="Search">
+                <button id="searchBtn" class="btn lio-primary-bg my-2 my-sm-0" type="submit"><i
+                    class="fas fa-search"></i></button>
+              </form>
+              <div class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false"><i class="fas fa-user-circle fa-lg"></i></a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Settings</a>
+                    {% if user.is_authenticated %}
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="Logout">
+                      Logout {{ user.username }}
+                    </a>
+                    {% endif %}
+
+                  </div>
+                </li>
+              </div>
+            </div>
+          </nav>
+          <!-- END NAV TOP -->
+
+          <div id="dash-body-inner" class="container-fluid p-5">
+
+            {% block dashboard-body %}
+
+            <!-- top stat row -->
+            <div class="row m-0 p-0">
+              <h3 style="font-family:bold;" class="mb-3">DASHBOARD {{std.name}} </h3>
+            </div>
+
+        <center><a href="{% url 'viewStudent' user.id %}"><button class="btn btn-danger">View Profile</button></a></center>
+
+
+        <div style="margin-top:80px;font-family:bold;" id="dash-body-inner" class="container-fluid p-5">
+
+            <div class="row m-0 p-0">
+              <div class="col-12 p-0" style="margin-top:40px;">
+                <div class="topstat d-flex justify-content-between">
+                  <div class="statbox">
+                    <a href="all_student"> <i class="fas fa-users fa-3x"></i>
+                      <div class="text">
+                        <p>students</p></a>
+                      </div>
+                  </div>
+                  <div class="statbox">
+                    <a href="{% url 'ViewStudentCourses' user.id %}">
+                    <i class="fas fa-users fa-3x"></i>
+                    <div class="text">
+                      <p>My Courses</p>
+                    </div></a>
+                  </div>
+                  <div class="statbox">
+                    <i class="fas fa-users fa-3x"></i>
+                    <a href="viewtimetable"><div class="text">
+                      <div class="text">
+                      <p>Timetable</p>
+                    </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+            <!-- second row -->
+            <div id="second-row" class="row m-0 p-0">
+              <div class="col-12 mt-5 p-0 d-flex justify-content-between">
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Upcoming Classes</h5>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    {% for cs in std.Courses.all %}
+                      {% for t in TD %}
+                        {% if t.Course == cs and t.Day == Today %}
+                        
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span class="name">{{cs.Course_Name}}<br></span>
+                        <span class="date">{{t.Time}}</span>
+                        <span class="organizer">{{t.Day}}</span>
+                      </li>
+
+                      {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+
+                  </ul>
+                </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h5>Notice Board</h5>
+                  </div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <h5 class="date">23 nov 2019</h5>
+                      <h5>Admit card collecting notice.</h5>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- end of second row -->
+
+            {% endblock dashboard-body %}
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  {% block extrajs %}
+  {% endblock %}
+</body>
+
+</html>
